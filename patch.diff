@@ -1,0 +1,23 @@
+From a0ff3f5165ee5e9d80e58db15e80d3d20a13206b Mon Sep 17 00:00:00 2001
+From: John Belamaric <jbelamaric@infoblox.com>
+Date: Sat, 22 Jul 2017 11:46:14 -0400
+Subject: [PATCH] Allow redirect URL to be passed in the query string.
+
+---
+ oauthproxy.go | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/oauthproxy.go b/oauthproxy.go
+index dd2b58e9..eb81d3f0 100644
+--- a/oauthproxy.go
++++ b/oauthproxy.go
+@@ -368,6 +368,9 @@ func (p *OAuthProxy) SignInPage(rw http.ResponseWriter, req *http.Request, code
+ 	if req.Header.Get("X-Auth-Request-Redirect") != "" {
+ 		redirect_url = req.Header.Get("X-Auth-Request-Redirect")
+ 	}
++	if rd, ok := req.URL.Query()["rd"]; ok {
++		redirect_url = rd[0]
++	}
+ 	if redirect_url == p.SignInPath {
+ 		redirect_url = "/"
+ 	}
