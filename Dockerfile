@@ -9,7 +9,6 @@ RUN set -ex \
     && git clone https://github.com/bitly/oauth2_proxy.git \
     && cd oauth2_proxy \
     && go get ./... \
-    && patch < /root/patch.diff \
     && go build
 
 FROM golang:1.8-alpine
