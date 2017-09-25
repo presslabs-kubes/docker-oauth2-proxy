@@ -8,10 +8,11 @@ RUN set -ex \
     && cd ./src/github.com/bitly/ \
     && git clone https://github.com/bitly/oauth2_proxy.git \
     && cd oauth2_proxy \
+    && git checkout v2.2 \
     && go get ./... \
     && go build
 
-FROM golang:1.8-alpine
+FROM alpine
 
 COPY --from=build-oauth2 /go/src/github.com/bitly/oauth2_proxy/oauth2_proxy /usr/local/bin/
 ENTRYPOINT ["oauth2_proxy"]
