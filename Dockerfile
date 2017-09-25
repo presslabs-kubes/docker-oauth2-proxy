@@ -14,5 +14,8 @@ RUN set -ex \
 
 FROM alpine
 
+RUN set -ex \
+    && apk add --no-cache ca-certificates
+
 COPY --from=build-oauth2 /go/src/github.com/bitly/oauth2_proxy/oauth2_proxy /usr/local/bin/
 ENTRYPOINT ["oauth2_proxy"]
