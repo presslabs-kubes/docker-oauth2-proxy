@@ -8,7 +8,6 @@ RUN set -ex \
     && cd ./src/github.com/bitly/ \
     && git clone https://github.com/bitly/oauth2_proxy.git \
     && cd oauth2_proxy \
-    && git checkout v2.2 \
     && go get ./... \
     && go build
 
